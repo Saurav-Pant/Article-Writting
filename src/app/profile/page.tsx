@@ -1,10 +1,9 @@
-import Hero from '@/components/Hero'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <Hero/>
+        <h1>Hello From Profile Page</h1>
     </div>
   )
 }
