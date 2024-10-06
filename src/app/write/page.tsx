@@ -3,8 +3,20 @@
 import { useState, useRef, useEffect } from 'react'
 import { Bold, List, Quote, Save } from 'lucide-react'
 import { toast } from 'react-hot-toast'
+import { getSession } from 'next-auth/react'
 
-export default function MonospacedDarkEditor() {
+export default async function Page() {
+    const session = await getSession()
+
+    if (!session) {
+        window.location.href = '/'
+        return null
+    }
+
+    return <MonospacedDarkEditor />
+}
+
+function MonospacedDarkEditor() {
     const [title, setTitle] = useState('Title')
     const [date, setDate] = useState('2024-05-22')
     const [content, setContent] = useState('Start Writting....')

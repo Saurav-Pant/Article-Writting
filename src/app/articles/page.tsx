@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Trash2 } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getSession } from 'next-auth/react';
 
 interface Article {
   id: string;
@@ -54,7 +55,19 @@ const SkeletonLoader = () => (
   </div>
 );
 
-export default function Articles() {
+export default async function Page() {
+    const session = await getSession()
+
+    if (!session) {
+        window.location.href = '/'
+        return null
+    }
+
+    return <Articles />
+}
+
+
+export function Articles() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
