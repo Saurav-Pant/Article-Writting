@@ -55,6 +55,7 @@ const Hero = () => {
             src={Preview}
             alt='Preview'
             width={1015}
+            height={500}
             className="border rounded-xl"
           />
           <BorderBeam size={250} duration={12} delay={0} />

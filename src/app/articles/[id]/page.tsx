@@ -100,10 +100,6 @@ const SkeletonLoader = () => {
         <div className="h-4 bg-gray-300 rounded"></div>
         <div className="h-4 bg-gray-300 rounded w-4/5"></div>
       </div>
-      <div className="absolute top-4 right-4 flex space-x-2">
-        <div className="w-8 h-8 bg-gray-300 rounded"></div>
-        <div className="w-8 h-8 bg-gray-300 rounded"></div>
-      </div>
     </div>
   )
 }
@@ -141,7 +137,7 @@ const SkeletonLoader = () => {
             <p className="text-gray-500 mb-4">
               {new Date(article.createdAt).toLocaleDateString()}
             </p>
-            <div className="text-gray-300" dangerouslySetInnerHTML={{ __html: article.content }} />
+            <div className="text-gray-300 text-lg" dangerouslySetInnerHTML={{ __html: article.content }} />
             <div>
               <ShinyButton
                 className="absolute top-4 right-28 bg-white px-4 py-2 rounded"

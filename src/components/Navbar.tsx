@@ -18,10 +18,21 @@ import { PenBoxIcon } from 'lucide-react'
 import ShinyButton from "@/components/ui/shiny-button";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+    AlertDialogFooter,
+    AlertDialogCancel,
+    AlertDialogAction,
+} from "@/components/ui/alert-dialog"
 const Navbar = () => {
     const { data: session } = useSession()
     const [isLoading, setIsLoading] = useState(false)
+    const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false)
     const router = useRouter()
 
     const LoginWithGoogle = async () => {
@@ -86,6 +97,11 @@ const Navbar = () => {
                 <div className="flex items-center gap-4 sm:gap-4">
                     {session?.user ? (
                         <>
+                            <div className='sm:mr-2 mr-0'>
+                                <Link href="/write">
+                                    <ShinyButton className='bg-white'>New Article</ShinyButton>
+                                </Link>
+                            </div>
                             <div className='sm:mr-3 mr-0'>
                                 <Link href="/articles">
                                     <ShinyButton className='bg-white'>Articles</ShinyButton>
@@ -102,7 +118,7 @@ const Navbar = () => {
                                     />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
-                                    <DropdownMenuItem onClick={handleLogout}>
+                                    <DropdownMenuItem onClick={() => setIsAlertDialogOpen(true)}>
                                         <LogOut className="mr-2 h-4 w-4" />
                                         <span>Logout</span>
                                     </DropdownMenuItem>
@@ -125,6 +141,33 @@ const Navbar = () => {
             </div>
             <Separator className="mt-2" />
             <ToastContainer />
+
+            <AlertDialog open={isAlertDialogOpen} onOpenChange={setIsAlertDialogOpen}>
+                <AlertDialogContent className="bg-black text-white">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Confirm Logout</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are you sure you want to logout? You will need to log in again to access your account.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction
+                            onClick={handleLogout}
+                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700
+                            focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50
+                            transition-transform transform hover:scale-105 active:scale-95"
+                        >
+                            Yes, Logout
+                        </AlertDialogAction>
+                        <AlertDialogCancel asChild>
+                            <button className="bg-gray-300 text-black px-4 py-2 rounded focus:outline-none
+                            transition-transform transform hover:scale-105 active:scale-95">
+                                Cancel
+                            </button>
+                        </AlertDialogCancel>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </nav>
     )
 }

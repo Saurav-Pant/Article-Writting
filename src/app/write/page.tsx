@@ -21,6 +21,8 @@ export default function Page() {
         fetchSession()
     }, [])
 
+
+
     if (!session) {
         return null
     }
@@ -29,11 +31,38 @@ export default function Page() {
 }
 
 function MonospacedDarkEditor() {
+    const [id, setId] = useState<string | null>(null)
     const [title, setTitle] = useState('Title')
     const [date, setDate] = useState('2024-05-22')
     const [content, setContent] = useState('Start Writting....')
     const [isSaving, setIsSaving] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const loadArticle = async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = urlParams.get('id');
+            if (articleId) {
+                try {
+                    const response = await fetch(`/api/article/${articleId}`);
+                    if (response.ok) {
+                        const article = await response.json();
+                        setId(article.id);
+                        setTitle(article.title);
+                        setDate(article.date.split('T')[0]);
+                        setContent(article.content);
+                        if (contentRef.current) {
+                            contentRef.current.innerHTML = article.content;
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading article:', error);
+                }
+            }
+        };
+        loadArticle();
+    }, []);
+
 
     useEffect(() => {
         if (contentRef.current) {
@@ -99,6 +128,7 @@ function MonospacedDarkEditor() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    id,
                     title,
                     date,
                     content,
@@ -111,6 +141,7 @@ function MonospacedDarkEditor() {
             }
 
             const savedPost = await response.json()
+            setId(savedPost.id)
             toast.success('Blog post saved successfully!')
         } catch (error:any) {
             console.error('Error saving blog post:', error)
@@ -119,6 +150,7 @@ function MonospacedDarkEditor() {
             setIsSaving(false)
         }
     }
+
     return (
         <div className="min-h-screen text-white p-8 font-mono">
             <div className="max-w-3xl mx-auto space-y-4">

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Write articles with ease",
 };
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600","700","800","900"] });
 
 export default function RootLayout({
   children,

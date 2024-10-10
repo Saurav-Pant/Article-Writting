@@ -6,6 +6,17 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+    AlertDialogFooter,
+    AlertDialogCancel,
+    AlertDialogAction,
+} from "@/components/ui/alert-dialog"
 
 interface Article {
     id: string;
@@ -60,6 +71,7 @@ const ArticlesPage = () => {
     const [articles, setArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -119,19 +131,51 @@ const ArticlesPage = () => {
                                         {article.title}
                                     </Link>
                                 </div>
-                                <button
-                                    onClick={() => handleDelete(article.id)}
-                                    className="text-red-500 hover:text-red-700"
-                                    aria-label="Delete article"
-                                >
-                                    <Trash2 size={20} />
-                                </button>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <button
+                                            onClick={() => setSelectedArticleId(article.id)}
+                                            className="text-red-500 hover:text-red-700"
+                                            aria-label="Delete article"
+                                        >
+                                            <Trash2 size={20} />
+                                        </button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent className="bg-black text-white">
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Are you sure you want to delete this article? This action cannot be undone.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogAction
+                                                onClick={() => {
+                                                    if (selectedArticleId) {
+                                                        handleDelete(selectedArticleId);
+                                                        setSelectedArticleId(null);
+                                                    }
+                                                }}
+                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700
+                                                focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50
+                                                transition-transform transform hover:scale-105 active:scale-95"
+                                            >
+                                                Yes, Delete
+                                            </AlertDialogAction>
+                                            <AlertDialogCancel asChild>
+                                                <button className="bg-gray-300 text-black px-4 py-2 rounded  focus:outline-none                                                transition-transform transform hover:scale-105 active:scale-95">
+                                                    Cancel
+                                                </button>
+                                            </AlertDialogCancel>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </li>
                         ))}
                     </ul>
                 </>
             )}
-            {typeof window !== 'undefined' && <ToastContainer />}
+            <ToastContainer />
         </div>
     );
 };
