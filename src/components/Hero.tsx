@@ -10,6 +10,11 @@ import { useSession } from "next-auth/react";
 import ShimmerButton from "./ui/shimmer-button";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./Footer";
+import { Spotlight } from "./ui/spotlight";
+import { MarqueeDemo } from "./marque";
+import BlurFade from "@/components/ui/blur-fade";
+
 
 
 const Hero = () => {
@@ -21,8 +26,14 @@ const Hero = () => {
   return (
     <>
       <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 mb-10">
+        <Spotlight
+            className="-top-40 left-0 md:left-60 md:-top-20 z-50"
+            fill="white"
+        />
         <div className="mx-4 mb-20 mt-12 hover:shadow-md transition-all duration-300 ease-in-out">
         </div>
+        <BlurFade delay={0.05} inView>
+
         {isLoggedIn ? (
           <Link href="/write">
             <ShimmerButton>
@@ -40,16 +51,24 @@ const Hero = () => {
       Write Article
           </ShimmerButton>
         )}
+        </BlurFade>
 
+        <BlurFade delay={0.15} inView>
         <h1 className="max-w-4xl text-5xl md:text-6xl lg:text-6xl font-bold mb-4 sm:mb-5 text-center mt-4">
-          Craft Minimalistic
+        Craft Minimalistic
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300 block sm:inline sm:ml-3">
             Articles
           </span>
         </h1>
-        <p className="text-sm sm:text-base lg:text-lg mb-6 font-normal text-center max-w-2xl">
-          Create articles effortlessly with a sleek, distraction-free interface.
-        </p>
+      </BlurFade>
+
+        <BlurFade delay={0.15 * 2} inView>
+            <p className="text-sm sm:text-base lg:text-lg mb-6 font-normal text-center max-w-2xl">
+                Create articles effortlessly with a sleek, distraction-free interface.
+            </p>
+      </BlurFade>
+
+        <BlurFade delay={0.15*3} inView>
         <div className="relative rounded-xl mx-2 mt-20 overflow-hidden">
           <Image
             src={Preview}
@@ -60,6 +79,9 @@ const Hero = () => {
           />
           <BorderBeam size={250} duration={12} delay={0} />
         </div>
+        </BlurFade>
+        <MarqueeDemo/>
+       <Footer/>
       </div>
         <ToastContainer />
     </>

@@ -54,7 +54,7 @@ const SkeletonLoader = () => (
     <div className="animate-pulse">
         <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
         <ul className="space-y-2">
-            {[...Array(2)].map((_, index) => (
+            {[...Array(5)].map((_, index) => (
                 <li key={index} className="flex items-start justify-between">
                     <div className="flex items-start w-full">
                         <div className="w-32 h-6 bg-gray-100 rounded"></div>
