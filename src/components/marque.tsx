@@ -3,40 +3,40 @@ import Marquee from "@/components/ui/marquee";
 
 const reviews = [
     {
-        name: "Alice",
-        username: "@alice",
+        name: "Ravi Kumar",
+        username: "@ravi",
         body: "This article writer is incredibly intuitive and easy to use. Highly recommend!",
-        img: "https://avatar.vercel.sh/alice",
+        img: "https://avatar.vercel.sh/ravi",
     },
     {
-        name: "Bob",
-        username: "@bob",
+        name: "John Smith",
+        username: "@john",
         body: "A game-changer for my writing process. The minimalistic design is perfect.",
-        img: "https://avatar.vercel.sh/bob",
+        img: "https://avatar.vercel.sh/john",
     },
     {
-        name: "Charlie",
-        username: "@charlie",
+        name: "Priya Sharma",
+        username: "@priya",
         body: "I've tried many writing tools, but this one stands out for its simplicity and efficiency.",
-        img: "https://avatar.vercel.sh/charlie",
+        img: "https://avatar.vercel.sh/priya",
     },
     {
-        name: "Dana",
-        username: "@dana",
+        name: "Michael Johnson",
+        username: "@michael",
         body: "The best tool for writers who want to focus on their content without distractions.",
-        img: "https://avatar.vercel.sh/dana",
+        img: "https://avatar.vercel.sh/michael",
     },
     {
-        name: "Eve",
-        username: "@eve",
+        name: "Anjali Patel",
+        username: "@anjali",
         body: "I love how this tool helps me stay organized and productive. A must-have for writers.",
-        img: "https://avatar.vercel.sh/eve",
+        img: "https://avatar.vercel.sh/anjali",
     },
     {
-        name: "Frank",
-        username: "@frank",
+        name: "David Brown",
+        username: "@david",
         body: "Simple, effective, and powerful. This article writer has everything I need.",
-        img: "https://avatar.vercel.sh/frank",
+        img: "https://avatar.vercel.sh/david",
     },
 ];
 

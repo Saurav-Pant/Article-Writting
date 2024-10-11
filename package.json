@@ -28,6 +28,7 @@
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.14",
     "next-auth": "^4.24.7",
+    "next-themes": "^0.3.0",
     "prisma": "^5.20.0",
     "react": "^18",
     "react-dom": "^18",

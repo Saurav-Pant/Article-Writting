@@ -53,7 +53,7 @@ const Hero = () => {
         )}
         </BlurFade>
 
-        <BlurFade delay={0.15} inView>
+        <BlurFade delay={0.25} inView>
         <h1 className="max-w-4xl text-5xl md:text-6xl lg:text-6xl font-bold mb-4 sm:mb-5 text-center mt-4">
         Craft Minimalistic
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300 block sm:inline sm:ml-3">
@@ -62,13 +62,13 @@ const Hero = () => {
         </h1>
       </BlurFade>
 
-        <BlurFade delay={0.15 * 2} inView>
+        <BlurFade delay={0.25 * 2} inView>
             <p className="text-sm sm:text-base lg:text-lg mb-6 font-normal text-center max-w-2xl">
                 Create articles effortlessly with a sleek, distraction-free interface.
             </p>
       </BlurFade>
 
-        <BlurFade delay={0.15*3} inView>
+        <BlurFade delay={0.25*3} inView>
         <div className="relative rounded-xl mx-2 mt-20 overflow-hidden">
           <Image
             src={Preview}

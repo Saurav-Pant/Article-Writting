@@ -17,6 +17,8 @@ import {
     AlertDialogCancel,
     AlertDialogAction,
 } from "@/components/ui/alert-dialog"
+import BlurFade from "@/components/ui/blur-fade";
+
 
 interface Article {
     id: string;
@@ -119,9 +121,12 @@ const ArticlesPage = () => {
                 <div>No articles found.</div>
             ) : (
                 <>
+                  <BlurFade delay={0.05} inView>
                     <h1 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">Articles</h1>
+                    </BlurFade>
                     <ul className="space-y-2">
                         {articles.map((article) => (
+                                <BlurFade delay={0.05*3} inView>
                             <li key={article.id} className="flex items-start justify-between">
                                 <div className="flex items-start">
                                     <span className="w-32 flex-shrink-0 text-gray-500">
@@ -137,7 +142,7 @@ const ArticlesPage = () => {
                                             onClick={() => setSelectedArticleId(article.id)}
                                             className="text-red-500 hover:text-red-700"
                                             aria-label="Delete article"
-                                        >
+                                            >
                                             <Trash2 size={20} />
                                         </button>
                                     </AlertDialogTrigger>
@@ -159,7 +164,7 @@ const ArticlesPage = () => {
                                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700
                                                 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50
                                                 transition-transform transform hover:scale-105 active:scale-95"
-                                            >
+                                                >
                                                 Yes, Delete
                                             </AlertDialogAction>
                                             <AlertDialogCancel asChild>
@@ -171,6 +176,7 @@ const ArticlesPage = () => {
                                     </AlertDialogContent>
                                 </AlertDialog>
                             </li>
+                                                </BlurFade>
                         ))}
                     </ul>
                 </>
