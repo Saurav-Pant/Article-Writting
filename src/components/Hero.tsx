@@ -11,7 +11,6 @@ import ShimmerButton from "./ui/shimmer-button";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "./Footer";
-import { Spotlight } from "./ui/spotlight";
 import { MarqueeDemo } from "./marque";
 import BlurFade from "@/components/ui/blur-fade";
 
@@ -25,11 +24,7 @@ const Hero = () => {
 
   return (
     <>
-      <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 mb-10">
-        <Spotlight
-            className="-top-40 left-0 md:left-60 md:-top-20 z-50"
-            fill="white"
-        />
+      <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 mb-10 over-x">
         <div className="mx-4 mb-20 mt-12 hover:shadow-md transition-all duration-300 ease-in-out">
         </div>
         <BlurFade delay={0.05} inView>

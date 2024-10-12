@@ -1,10 +1,9 @@
 "use client"
-
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
-import { LogOut } from 'lucide-react'
+import { LogOut, Menu, X } from 'lucide-react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import {
     DropdownMenu,
@@ -29,12 +28,13 @@ import {
     AlertDialogCancel,
     AlertDialogAction,
 } from "@/components/ui/alert-dialog"
-
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Navbar = () => {
     const { data: session } = useSession()
     const [isLoading, setIsLoading] = useState(false)
     const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const router = useRouter()
 
     const LoginWithGoogle = async () => {
@@ -87,6 +87,10 @@ const Navbar = () => {
         }, 2000);
     }
 
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
+
     return (
         <nav className="px-2 sm:px-8 md:px-12 lg:px-20 py-2">
             <div className="flex items-center justify-between px-2 sm:px-6">
@@ -96,17 +100,17 @@ const Navbar = () => {
                         <span className="ml-1 sm:ml-2 text-sm sm:text-xl font-semibold">ArticleGen</span>
                     </div>
                 </Link>
-                <div className="flex items-center gap-4 sm:gap-4">
+                <div className="hidden md:flex items-center gap-4 sm:gap-4">
                     {session?.user ? (
                         <>
                             <div className='sm:mr-2 mr-0'>
                                 <Link href="/write">
-                                    <ShinyButton className='bg-white'>New Article</ShinyButton>
+                                    <ShinyButton className='bg-white text-xs sm:text-sm py-1 sm:py-2 px-2 sm:px-4'>New Article</ShinyButton>
                                 </Link>
                             </div>
                             <div className='sm:mr-3 mr-0'>
                                 <Link href="/articles">
-                                    <ShinyButton className='bg-white'>Articles</ShinyButton>
+                                    <ShinyButton className='bg-white text-xs sm:text-sm py-1 sm:py-2 px-2 sm:px-4'>Articles</ShinyButton>
                                 </Link>
                             </div>
                             <DropdownMenu>
@@ -127,7 +131,6 @@ const Navbar = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </>
-
                     ) : (
                         <Button
                             variant="outline"
@@ -141,7 +144,54 @@ const Navbar = () => {
                         </Button>
                     )}
                 </div>
+                <div className="md:hidden">
+                    <button onClick={toggleMenu} className="text-white">
+                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="md:hidden mt-4"
+                    >
+                        {session?.user ? (
+                            <>
+                                <Link href="/write">
+                                    <ShinyButton className='bg-white text-sm py-2 px-4 w-full mb-2'>New Article</ShinyButton>
+                                </Link>
+                                <Link href="/articles">
+                                    <ShinyButton className='bg-white text-sm py-2 px-4 w-full mb-2'>Articles</ShinyButton>
+                                </Link>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full mb-2 text-black"
+                                    onClick={() => setIsAlertDialogOpen(true)}
+                                >
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    <span>Logout</span>
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="flex items-center justify-center gap-2 w-full"
+                                onClick={LoginWithGoogle}
+                                disabled={isLoading}
+                            >
+                                <Image src="https://www.google.com/favicon.ico" alt="Google Logo" width={16} height={16} />
+                                {isLoading ? 'Logging in...' : 'Get Started'}
+                            </Button>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <Separator className="mt-2" />
             <ToastContainer />
 
