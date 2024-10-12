@@ -125,7 +125,7 @@ const SkeletonLoader = () => {
               dangerouslySetInnerHTML={{ __html: editedContent || '' }}
             />
             <ShinyButton
-              className="absolute top-4 right-28 bg-white px-4 py-2 rounded"
+              className="fixed bottom-4 right-4 bg-white px-4 py-2 rounded md:absolute md:top-4 md:right-28 h-8 w-20 mx-auto"
               onClick={handleSave}
             >
               Save
@@ -137,10 +137,10 @@ const SkeletonLoader = () => {
             <p className="text-gray-500 mb-4">
               {new Date(article.createdAt).toLocaleDateString()}
             </p>
-            <div className="text-gray-300 text-lg" dangerouslySetInnerHTML={{ __html: article.content }} />z
-            <div>
+            <div className="text-gray-300 text-lg" dangerouslySetInnerHTML={{ __html: article.content }} />
+            <div className="fixed bottom-4 right-4 md:absolute md:top-4 md:right-28">
               <ShinyButton
-                className="absolute top-4 right-28 bg-white px-4 py-2 rounded"
+                className="bg-white px-4 py-2 rounded w-12 h-8 flex items-center justify-center"
                 onClick={() => setIsEditing(true)}
               >
                 <Edit3Icon size={16} />

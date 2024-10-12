@@ -59,10 +59,10 @@ const SkeletonLoader = () => (
             {[...Array(5)].map((_, index) => (
                 <li key={index} className="flex items-start justify-between">
                     <div className="flex items-start w-full">
-                        <div className="w-32 h-6 bg-gray-100 rounded sm:w-20 sm:h-5 xs:w-16 xs:h-4"></div>
-                        <div className="ml-2 h-6 bg-gray-100 rounded w-2/3 sm:w-1/2 sm:h-5 xs:w-1/3 xs:h-4"></div>
+                        <div className="w-32 h-6 bg-gray-100 rounded sm:w-24 sm:h-5 xs:w-20 xs:h-4"></div>
+                        <div className="ml-2 h-6 bg-gray-100 rounded w-2/3 sm:h-5 xs:h-4"></div>
                     </div>
-                    <div className="w-6 h-6 bg-gray-100 rounded-full sm:w-4 sm:h-4 xs:w-3 xs:h-3"></div>
+                    <div className="w-6 h-6 bg-gray-100 rounded-full sm:w-5 sm:h-4 xs:w-3 xs:h-3"></div>
                 </li>
             ))}
         </ul>
