@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Bold, List, Quote, Save } from 'lucide-react'
-import { toast } from 'react-hot-toast'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getSession } from 'next-auth/react'
 import { Session } from 'next-auth'
 
@@ -206,6 +207,7 @@ function MonospacedDarkEditor() {
                     aria-label="Blog post content"
                 />
             </div>
+            <ToastContainer />
         </div>
     )
 }
