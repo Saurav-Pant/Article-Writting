@@ -29,7 +29,8 @@ const animationProps = {
 interface ShinyButtonProps {
     children: React.ReactNode;
     className?: string;
-    onClick?: () => void; 
+    onClick?: () => void;
+    disabled?: boolean;
   }
 
 const ShinyButton = ({ children, className, ...props }: ShinyButtonProps) => {
